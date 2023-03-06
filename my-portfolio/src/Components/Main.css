@@ -9,8 +9,8 @@ body {
     justify-content: center;
     align-items: center;
 
-    transition-duration: 2s;
-    transition-delay: 1s;
+    /* transition-duration: 2s;
+    transition-delay: 1s; */
 }
 
 
@@ -23,7 +23,13 @@ body {
     justify-content: center;
     align-items: center;
     background-color: black;
-    transition-duration: 2s;
+    transition-duration: 0.5s;
+
+    transform: scale(1);
+    /* position: fixed; */
+    transform: translate(100);
+    /* transform: scale(0.3); */
+    /* z-index: 1; */
     /* background-image: radial-gradient(orange, white); */
 }
 
@@ -41,12 +47,14 @@ body {
     font-style: italic;
     font-family: 'Papyrus', 'Fantasy';
     text-transform: uppercase;
+    transition-duration: 0.5s;
 }
 
 .welcome-text {
     font-family: 'Monaco';
     font-size: 20px;
     color: white;
+    transition-duration: 0.5s;
 }
 
 .intro {
@@ -61,4 +69,6 @@ body {
     font-family: 'Monaco';
     color: white;
     font-size: 2vw;
+
+    transition-duration: 0.5s;
 }
