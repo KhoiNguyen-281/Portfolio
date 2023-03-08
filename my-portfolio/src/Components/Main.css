@@ -1,36 +1,28 @@
 body {
     min-height: 100vh;
-    
-}
-.main {
-    width: 100vw;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    /* transition-duration: 2s;
-    transition-delay: 1s; */
 }
+.main {
+    width: 70vw;
+    height: 70vh;
 
+    /* border-radius: 8px; */
+}
 
 .welcome {
     border-radius: 8px;
-    width: 90vw;
-    height: 90vh;
+    /* width: 70vw; */
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: black;
     transition-duration: 0.5s;
-
+    z-index: 2;
     transform: scale(1);
-    /* position: fixed; */
-    transform: translate(100);
-    /* transform: scale(0.3); */
-    /* z-index: 1; */
-    /* background-image: radial-gradient(orange, white); */
 }
 
 
@@ -43,7 +35,7 @@ body {
     justify-content: center;
 
     color: white;
-    font-size: 3vw;
+    font-size: 2vw;
     font-style: italic;
     font-family: 'Papyrus', 'Fantasy';
     text-transform: uppercase;
@@ -52,7 +44,7 @@ body {
 
 .welcome-text {
     font-family: 'Monaco';
-    font-size: 20px;
+    font-size: 1vw;
     color: white;
     transition-duration: 0.5s;
 }
@@ -68,7 +60,7 @@ body {
 
     font-family: 'Monaco';
     color: white;
-    font-size: 2vw;
+    font-size: 1.5vw;
 
     transition-duration: 0.5s;
 }

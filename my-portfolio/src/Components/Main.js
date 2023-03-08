@@ -1,25 +1,31 @@
 
 import "./Main.css"
 import {useState, useRef } from 'react'
+import PersonalInfo, { Experience } from "./Details/Personal";
 
 function WelcomeIntro() {
     const intro = "This page include all the information about me, please enjoy your journey while exploring more interesting information about me";
     const instructure = "Please scroll down to start"
+
+    const [scale, setScale] =  useState({scale: 1});
+
+    let handleScroll =  ScrollAble(scale.scale, setScale);
     return(
-        <>
+        <div className="welcome" onWheelCapture={handleScroll} style={{transform: `scale(${scale.scale})`}} >
             <div className="intro">
                 {intro}
             </div>
             <div className="welcome-text">
                 {instructure}
             </div>
-        </>
+        </div>
     );
 }
 
 function WelcomeSection() {
     const welcome = "welcome to my portfolio"
     const instuctor = "Next"
+
 
     return(
         <div className="welcome">
@@ -31,81 +37,64 @@ function WelcomeSection() {
     );
 }
 
+function useCustomHook() {
+    const [section, setSection] = useState(<WelcomeSection></WelcomeSection>)
 
-function UseWelcomeSection() {
-
-    const [section, setSection] = useState(WelcomeSection());
-    return(
-        <div onClick={() => setSection(ScrollAble())}>
-            {section} 
-        </div>
-    );
-    
-    
+    const click = () => {
+        setSection(<WelcomeIntro></WelcomeIntro>)
+    }
+    return [section, click]
 }
 
-function ScrollAble() {
 
-    const[temp, setTemp] = useState({scale: 1});
-    // const section = WelcomeIntro();
+function ScrollAble(scale, setScale) {
 
     const onScroll = (e) => {
         const factor = 0.1;
-        const delta = e.deltaY / 200;
-        const newScale =  temp.scale + delta * factor;
+        const delta = e.deltaY / 180;
+        const newScale =  scale - delta * factor;
     
-        if (newScale > 0.3 && newScale < 1) {
-            setTemp({
+        if (newScale > 0.2 && newScale < 1.00001) {
+            setScale({
                 scale: newScale
             });  
         }
     };
-
-    
-    return(
-        <div className="welcome" style={{transform: `scale(${temp.scale})`}} onWheelCapture={onScroll}>
-            <WelcomeIntro></WelcomeIntro>
-        </div>
-    );
+    return onScroll;
 }
 
-function ChangableEle({section , count}) {
+export function ChangableEle(scale, setScale) {
 
-    const currentSection = useRef(section)
-
-    const newCSS = {
-        transform: 'scale(0.3)'
-    }
-    const handleClick= () => {
-        
-        if (count === 0) {
-            
-            currentSection.current.style.transform = 'scale(0.3)';
-            count += 1;
-            
-        } else {
-            currentSection.current.style.transform = `scale(1)`
-            // setNextStyle(default)
-            count-=1;
+    const handleClick = () => {
+        const tempScale = {
+            default:  1,
+            change: 3
         }
 
+        let newScale;
+        if (scale == tempScale.default) {
+            newScale = tempScale.change;
+        } else {
+            newScale = tempScale.default;
+        }
+
+        setScale({scale: newScale})
     };
    
-    return (
-        <div ref={currentSection} style={{transform: 'scale(1)'}} onClick={handleClick}>
-            {section}
-        </div>
-    );
+    return handleClick;
 }
+
 
 export default function Main() {
     
-    
+    const [section, setSection] = useCustomHook();
     return(
-        <div className="main">
-            {/* <ChangableEle section={UseWelcomeSection()} count ={0}></ChangableEle> */}
-            {/* <ScrollAble ></ScrollAble> */}
-            <UseWelcomeSection></UseWelcomeSection>
+        <div className="main" onClick={setSection}>
+            {/* <ChangableEle selectedSection = {PersonalInfo()} count={0}></ChangableEle> */}
+
+            {section}
+            <PersonalInfo></PersonalInfo>
         </div>
     );
 };
+
